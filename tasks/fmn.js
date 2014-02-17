@@ -1,7 +1,7 @@
 var bowerConfig = require('bower-config');
 
 var fmn = require('../lib/fmn.js');
-var report = require('../lib/fmn.js');
+var report = require('../lib/report.js');
 
 module.exports = function(grunt){
 	
@@ -37,17 +37,27 @@ module.exports = function(grunt){
 		
 		// Scan each of the directories - aggregate the output.
 		var resultList = fmn(dirs);
-		if (!report(resultList)){
-			// TODO: Check the return value??
+		var reportResult = report(resultList);
+		
+		if (reportResult.isValid){
+			grunt.log.oklns('No development links found.');
+		} else {
+			reportResult.messageList.forEach(function(item){
+				if (item.isValid){
+					grunt.log.writeln(item.message);
+				} else {
+					grunt.log.errorlns(item.message);
+				}
+			});
+			
 			// Warn or fail because there are linked directories.
-			var message = 'Found linked dependencies.';
+			var message = 'Found linked dependencies or error.';
 			if (options.failOnLinks){
 				grunt.fail.fatal(message);
 			} else {
 				grunt.fail.warn(message);
 			}
 		}
-		
 	});
 	
 	
