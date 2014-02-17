@@ -1,3 +1,5 @@
-var scanner = require('./lib/fmn');
+var fmn = require('./lib/fmn');
+var report = require('./lib/report');
 
-scanner('test/fixtures');
+var resultList = fmn('test/fixtures');
+report(resultList);
