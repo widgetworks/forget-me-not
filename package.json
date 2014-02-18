@@ -1,17 +1,17 @@
 {
   "name": "forget-me-not",
   "version": "0.0.1",
-  "description": "Task to check for development dependencies before release.",
+  "description": "Check for development dependencies before release.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:widgetworks/forget-me-not.git"
+    "url": "git@github.com:widgetworks/forget-me-not.git"
   },
   "author": "Coridyn",
-  "license": "private",
+  "license": "MIT",
   "dependencies": {
     "bower-config": "~0.5.0"
   },
