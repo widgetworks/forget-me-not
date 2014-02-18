@@ -82,7 +82,8 @@ $ grunt fmn --warn
 
 ## TODO
 
- 1. Release to npm.
+ 1. Add tests.
  2. Update to support Node use case.
- 2. Allow directories to be ignored.
- 3. Add interactive mode; allow directories to be ignored temporarily.
+ 3. Release to npm.
+ 4. Allow directories to be ignored.
+ 5. Add interactive mode; allow directories to be ignored temporarily.
