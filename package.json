@@ -1,6 +1,6 @@
 {
   "name": "forget-me-not",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Check for development dependencies before release.",
   "main": "index.js",
   "scripts": {
