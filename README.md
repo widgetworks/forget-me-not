@@ -12,8 +12,12 @@ By default it assumes you are using npm and Bower and it will automatically add 
 ## Installation
 
 ```bash
-$ npm install forget-me-not --save-dev
+$ npm install git@github.com:widgetworks/forget-me-not.git --save-dev
 ```
+
+NOTE: We haven't released to npm yet, once we have then you can use the command below:
+
+~~$ npm install forget-me-not --save-dev~~
 
 
 ## Usage
@@ -78,6 +82,7 @@ $ grunt fmn --warn
 
 ## TODO
 
- 1. Update to support Node use case.
+ 1. Release to npm.
+ 2. Update to support Node use case.
  2. Allow directories to be ignored.
  3. Add interactive mode; allow directories to be ignored temporarily.
