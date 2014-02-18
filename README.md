@@ -12,7 +12,7 @@ By default it assumes you are using npm and Bower and it will automatically add 
 ## Installation
 
 ```bash
-$ npm install git@github.com:widgetworks/forget-me-not.git --save-dev
+$ npm install git+ssh://git@github.com:widgetworks/forget-me-not.git --save-dev
 ```
 
 NOTE: We haven't released to npm yet, once we have then you can use the command below:
