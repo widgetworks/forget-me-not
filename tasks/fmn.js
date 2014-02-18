@@ -14,9 +14,10 @@ module.exports = function(grunt){
 			npm: true,
 			bower: true,
 			
-			// If true then we will fail the task, otherwise we will just warn.
-			failOnLinks: true
+			// If false then we will fail the task, otherwise we will just warn.
+			warnOnly: false
 		});
+		options.warnOnly = grunt.option('warn') || options.warnOnly;
 		
 		var dirs = [];
 		if (options.dirs){
@@ -52,10 +53,10 @@ module.exports = function(grunt){
 			
 			// Warn or fail because there are linked directories.
 			var message = 'Found linked dependencies or error.';
-			if (options.failOnLinks){
-				grunt.fail.fatal(message);
-			} else {
+			if (options.warnOnly){
 				grunt.fail.warn(message);
+			} else {
+				grunt.fail.fatal(message);
 			}
 		}
 	});
