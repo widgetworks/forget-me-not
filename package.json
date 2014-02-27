@@ -1,23 +1,40 @@
 {
   "name": "forget-me-not",
-  "version": "0.1.0",
-  "description": "Check for development dependencies before release.",
-  "main": "index.js",
+  "version": "0.2.0-SNAPSHOT",
+  "description": "npm/grunt pre-release dependency check",
+  "main": "lib/fmn.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test/*.js"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:widgetworks/forget-me-not.git"
   },
-  "author": "Coridyn",
-  "license": "MIT",
+  "homepage": "https://github.com/widgetworks/forget-me-not",
+  "bugs":{
+    "url": "https://github.com/widgetworks/forget-me-not/issues"
+  },
+  "author": {
+    "name": "Coridyn",
+    "email": "coridyn@widgetworks.com.au",
+  },
+  "licenses": [{
+    "type": "MIT",
+    "url": "https://github.com/karlgoldstein/grunt-html2js/blob/master/LICENSE-MIT"
+  }],
+  "keywords": [
+    "gruntplugin",
+    "release",
+    "dependencies"
+  ],
   "dependencies": {
     "bower-config": "~0.5.0"
   },
   "devDependencies": {
     "expect.js": "~0.2.0",
-    "fstream": "~0.1.25",
-    "rimraf": "~2.2.6"
+    "rimraf": "~2.2.6",
+    "ncp": "~0.5.0",
+    "mocha": "~1.17.1",
+    "grunt": "~0.4.2"
   }
 }

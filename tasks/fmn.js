@@ -1,7 +1,4 @@
-var bowerConfig = require('bower-config');
-
-var fmn = require('../lib/fmn.js');
-var report = require('../lib/report.js');
+var task = require('./lib/task.js');
 
 module.exports = function(grunt){
 	
@@ -19,26 +16,8 @@ module.exports = function(grunt){
 		});
 		options.warnOnly = grunt.option('warn') || options.warnOnly;
 		
-		var dirs = [];
-		if (options.dirs){
-			dirs = dirs.concat(options.dirs)
-		}
-		
-		if (options.npm){
-			dirs.push('node_modules');
-		}
-		
-		if (options.bower){
-			// Look up the configured bower directory.
-			var bower = bowerConfig.read();
-			if (bower){
-				dirs.push(bower.directory);
-			}
-		}
-		
 		// Scan each of the directories - aggregate the output.
-		var resultList = fmn(dirs);
-		var reportResult = report(resultList);
+		var reportResult = task(options);
 		
 		if (reportResult.isValid){
 			grunt.log.oklns('No development links found.');
@@ -60,6 +39,5 @@ module.exports = function(grunt){
 			}
 		}
 	});
-	
 	
 };

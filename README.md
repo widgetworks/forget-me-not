@@ -1,12 +1,17 @@
 forget-me-not
 =============
 
-> npm/grunt project pre-flight dependency check
+> npm/bower pre-release dependency check
 
-Avoid accidentally releasing your project with development libraries symlinked in (e.g. through `npm link` and `bower link`).
+Do you like `npm link` and `bower link` for development but keep forgetting to update your libraries when you make a release?
 
-forget-me-not will scan the specified paths for development dependencies and return a list of symlinked directories.
-By default it assumes you are using npm and Bower and it will automatically add their paths to the list to be scanned.
+forget-me-not is a Grunt task that will prevent you from making a release when you've still got development libraries symlinked into your project.
+
+By default forget-me-not will scan your npm (node_modules) and Bower (bower_components) directories for development dependencies. If it finds any symlinks then forget-me-not will fail the task and list out the offending items.
+
+You can add extra directories to scan with the `dirs` config option.
+
+If you've customised your Bower components directory with a `.bowerrc` file then forget-me-not will automatically scan your custom directory - no extra configuration needed :)
 
 
 ## Installation
@@ -20,36 +25,21 @@ NOTE: We haven't released to npm yet, once we have then you can use the command 
 ~~$ npm install forget-me-not --save-dev~~
 
 
-## Usage
+## Options
 
-__Node:__
-
-```javascript
-var fmn = require('forget-me-not');
-
-var result = fmn(['path_to_scan'], {
-  npm: true,
-  bower: true,
-  warnOnly: false
-});
-```
-
-The `result` has the following structure:
+These are the default options - all properties are optional.
 
 ```javascript
-  {
-    isValid: boolean;
-    messageList: [
-      {
-        dir: string,       // Parent directory
-        isValid: boolean,  // true if the directory is clean
-        message: string,   // Result message
-        linkedDirs: [string] // List of symlinked directories to be fixed.
-      }
-    ]
+  options: {
+    npm: true,    // Scan the npm node_modules directory.
+    bower: true,  // Scan the Bower components directory.
+    dirs: ['path_to_scan'], // [optional] Extra paths to scan.
+    warnOnly: false   // When true just show a warning instead of failing the task (can use --force to continue).
   }
 ```
 
+
+## Usage
 
 __Grunt:__
 
@@ -58,18 +48,22 @@ __Grunt:__
 {
   ...
   'forget-me-not': {
-    check: {
+    release: {},  // Simplest target, just use defaults.
+    snapshot: {
+      // Override default options if needed:
       options: {
-        npm: true,
-        bower: true,
+        npm: false,
+        bower: false,
         dirs: ['path_to_scan'],
-        warnOnly: false
+        warnOnly: true
       }
     }
   }
   ...
   
   grunt.loadNpmTasks('forget-me-not');
+  
+  // make an alias that's easier to type...
   grunt.registerTask('fmn', ['forget-me-not']);
 }
 ```
@@ -79,11 +73,3 @@ $ grunt fmn
 $ grunt fmn --warn
 ```
 
-
-## TODO
-
- 1. Add tests.
- 2. Update to support Node use case.
- 3. Release to npm.
- 4. Allow directories to be ignored.
- 5. Add interactive mode; allow directories to be ignored temporarily.
