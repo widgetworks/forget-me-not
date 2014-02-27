@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 var fmn = require('../../lib/fmn.js');
 var report = require('../../lib/report.js');
 var bowerConfig = require('bower-config');
@@ -8,14 +10,16 @@ module.exports = function(options){
 		dirs = dirs.concat(options.dirs)
 	}
 	
-	if (options.npm){
-		dirs.push('node_modules');
+	// Only add bower and npm directories if they exist.
+	var npmDir = 'node_modules';
+	if (options.npm && fs.existsSync(npmDir)){
+		dirs.push(npmDir);
 	}
 	
 	if (options.bower){
 		// Look up the configured bower directory.
 		var bower = bowerConfig.read();
-		if (bower){
+		if (bower && fs.existsSync(bower.directory)){
 			dirs.push(bower.directory);
 		}
 	}

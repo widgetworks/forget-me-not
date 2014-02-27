@@ -166,6 +166,18 @@ describe('forget-me-not', function(){
 					expect(reportResult.isValid).to.equal(false);
 					expect(reportResult.messageList.length).to.eql(3);
 				});
+				
+				it('ignores bower and npm directories if they don\'t exist' , function(){
+					process.chdir(path.join(__dirname, '../tmp/valid'));
+					
+					var reportResult = fmnTask({
+						npm: true,
+						bower: true
+					});
+					
+					expect(reportResult.isValid).to.equal(true);
+					expect(reportResult.messageList.length).to.eql(0);
+				});
 			});
 		});
 		

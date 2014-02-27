@@ -69,7 +69,22 @@ __Grunt:__
 ```
 
 ```bash
-$ grunt fmn
-$ grunt fmn --warn
+$ grunt fmn:release
+$ grunt fmn:release --warn
+Running "forget-me-not:release" (forget-me-not) task
+>> Scanned "node_modules": 33 children (2 symlinked)
+>> Invalid dirs: [
+>>      my-dev-library,
+>>      wiwo-grunt-lib
+>> ]
+>> Scanned "bower_components": 20 children (1 symlinked)
+>> Invalid dirs: [
+>>      wiwo-lib
+>> ]
+Fatal error: Found linked dependencies or error.
+
+$ grunt fmn:release
+Running "forget-me-not:release" (forget-me-not) task
+>> No development links found.
 ```
 
