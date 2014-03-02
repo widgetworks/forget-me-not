@@ -17,12 +17,8 @@ If you've customised your Bower components directory with a `.bowerrc` file then
 ## Installation
 
 ```bash
-$ npm install git+ssh://git@github.com:widgetworks/forget-me-not.git --save-dev
+$ npm install forget-me-not --save-dev
 ```
-
-NOTE: We haven't released to npm yet, once we have then you can use the command below:
-
-~~$ npm install forget-me-not --save-dev~~
 
 
 ## Options
