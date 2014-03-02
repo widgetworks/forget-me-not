@@ -1,6 +1,6 @@
 {
   "name": "forget-me-not",
-  "version": "0.2.0-SNAPSHOT",
+  "version": "0.2.0",
   "description": "npm/grunt pre-release dependency check",
   "main": "lib/fmn.js",
   "scripts": {
@@ -18,10 +18,12 @@
     "name": "Coridyn",
     "email": "coridyn@widgetworks.com.au"
   },
-  "licenses": [{
-    "type": "MIT",
-    "url": "https://github.com/karlgoldstein/grunt-html2js/blob/master/LICENSE-MIT"
-  }],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/karlgoldstein/grunt-html2js/blob/master/LICENSE-MIT"
+    }
+  ],
   "keywords": [
     "gruntplugin",
     "release",
