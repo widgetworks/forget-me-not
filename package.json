@@ -1,6 +1,6 @@
 {
   "name": "forget-me-not",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "npm/grunt pre-release dependency check",
   "main": "lib/fmn.js",
   "scripts": {
