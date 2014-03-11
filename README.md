@@ -30,7 +30,7 @@ These are the default options - all properties are optional.
     npm: true,    // Scan the npm node_modules directory.
     bower: true,  // Scan the Bower components directory.
     dirs: ['path_to_scan'], // [optional] Extra paths to scan.
-    warnOnly: false   // When true just show a warning instead of failing the task (can use --force to continue).
+    onError: 'warn'   // How to handle errors (i.e. linked dependencies): 'warn', 'log'.
   }
 ```
 
@@ -51,7 +51,7 @@ __Grunt:__
         npm: false,
         bower: false,
         dirs: ['path_to_scan'],
-        warnOnly: true
+        onError: 'warn'
       }
     }
   }
@@ -66,7 +66,7 @@ __Grunt:__
 
 ```bash
 $ grunt fmn:release
-$ grunt fmn:release --warn
+$ grunt fmn:release --fmn-log
 Running "forget-me-not:release" (forget-me-not) task
 >> Scanned "node_modules": 33 children (2 symlinked)
 >> Invalid dirs: [
