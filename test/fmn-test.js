@@ -10,14 +10,17 @@ var fmnTask = require('../tasks/lib/task');
 
 var testLinks = {
 	// src: dest
-	'invalid/original': 'invalid/link',
-	'bower-invalid/bower_components/original': 'bower-invalid/bower_components/link',
-	'bower-rc-invalid/build/vendor/assets/original': 'bower-rc-invalid/build/vendor/assets/link',
-	'npm-invalid/node_modules/original': 'npm-invalid/node_modules/link',
+	'invalid/original': 								'invalid/link',
+	'bower-invalid/bower_components/original': 			'bower-invalid/bower_components/link',
+	'bower-rc-invalid/build/vendor/assets/original': 	'bower-rc-invalid/build/vendor/assets/link',
+	'npm-invalid/node_modules/original': 				'npm-invalid/node_modules/link',
 	
-	'multi-invalid/other/invalid/original': 'multi-invalid/other/invalid/link',
-	'multi-invalid/node_modules/original': 'multi-invalid/node_modules/link',
-	'multi-invalid/bower_components/original': 'multi-invalid/bower_components/link'
+	'multi-invalid/other/invalid/original': 			'multi-invalid/other/invalid/link',
+	'multi-invalid/node_modules/original': 				'multi-invalid/node_modules/link',
+	'multi-invalid/bower_components/original': 			'multi-invalid/bower_components/link',
+	
+	'npm-scoped-modues/node_modules/original': 			'npm-scoped-modues/node_modules/link',
+	'npm-scoped-modues/node_modules/@wiwo/original': 	'npm-scoped-modues/node_modules/@wiwo/link'
 };
 
 
@@ -31,42 +34,54 @@ Scenarios:
 */
 
 function initTestDirs(done){
-	ncp('./test/fixtures/', './tmp/', {clobber: false}, function(err){
-		if (err){
-			// error
-			done(err);
-		} else {
-			
-			var isWindows = os.platform() == 'win32';
-			var linkType = isWindows ? 'junction' : 'dir';
-			
-			// Link all the paths.
-			for (var i in testLinks){
-				var src = path.join('tmp', i);
-				var dest = path.join('tmp', testLinks[i]);
-				if (!fs.existsSync(dest)){
-					fs.symlinkSync(src, dest, linkType);
-				} else {
-					console.log('Skipping "'+dest+'", already exists.');
+	ncp(
+		'./test/fixtures/',
+		'./tmp/',
+		{clobber: false},
+		function(err){
+			if (err){
+				// error
+				done(err);
+			} else {
+				
+				var isWindows = os.platform() == 'win32';
+				var linkType = isWindows ? 'junction' : 'dir';
+				
+				// Link all the paths.
+				for (var i in testLinks){
+					var src = path.join('tmp', i);
+					var dest = path.join('tmp', testLinks[i]);
+					
+					console.log(`src  = ${src}`);
+					console.log(`dest = ${dest}`);
+					
+					if (!fs.existsSync(dest)){
+						fs.symlinkSync(src, dest, linkType);
+					} else {
+						console.log('Skipping "'+dest+'", already exists.');
+					}
 				}
+				
+				done();
 			}
-			
-			done();
 		}
-	});
+	);
 }
 
 function cleanTestDirs(done){
+	console.log('CLEANING');
 	rimraf('tmp', done);
 }
 
 describe('forget-me-not', function(){
 	before(function(done){
-		initTestDirs(done);
-	});
-	
-	after(function(done){
-		cleanTestDirs(done);
+		cleanTestDirs(function(err){
+			if (err){
+				done(err);
+			} else {
+				initTestDirs(done);
+			}
+		});
 	});
 	
 	describe('grunt task:', function(){
@@ -288,6 +303,19 @@ describe('forget-me-not', function(){
 				
 				expect(reportResult.isValid).to.equal(false);
 				expect(reportResult.messageList.length).to.eql(1);
+			});
+			
+			it('handles npm scoped modules', function(){
+				process.chdir(path.join(__dirname, '../tmp/npm-scoped-modules'));
+				
+				var reportResult = fmnTask({
+					npm: true,
+					bower: false
+				});
+				
+				expect(reportResult.isValid).to.equal(true);
+				expect(reportResult.messageList.length).to.eql(1);
+				expect(reportResult.messageList).to.eql([]);
 			});
 		});
 	});
