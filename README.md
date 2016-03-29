@@ -44,7 +44,12 @@ __Grunt:__
 {
   ...
   'forget-me-not': {
-    release: {},  // Simplest target, just use defaults.
+    options: {
+      npm: false,   // Check node_modules
+      bower: false, // Check configured bower directory
+      dirs: ['path_to_scan'], // Extra directories to scan
+      onError: 'error' // 'error' | 'warn' what to do when symlinks are found
+    },
     snapshot: {
       // Override default options if needed:
       options: {
@@ -62,20 +67,20 @@ __Grunt:__
 ```
 
 ```bash
+# Check for symlinks with default options
 $ grunt forget-me-not
 
-# Shorter alias
+# Shorter task alias
 $ grunt fmn
 
-# Check just the 'release' sub-task
-$ grunt forget-me-not:release
-$ grunt fmn:release
-
 # Just log out instead of erroring
-$ grunt fmn:release --fmn-log
+$ grunt fmn --fmn-log
+
+# Get the options from the 'forget-me-not.snapshot' config path 
+$ grunt fmn:shapshot
 
 
-Running "forget-me-not:release" (forget-me-not) task
+Running "forget-me-not" task
 >> Scanned "node_modules": 33 children (2 symlinked)
 >> Invalid dirs: [
 >>      my-dev-library,
@@ -87,8 +92,8 @@ Running "forget-me-not:release" (forget-me-not) task
 >> ]
 Fatal error: Found linked dependencies or error.
 
-$ grunt fmn:release
-Running "forget-me-not:release" (forget-me-not) task
+$ grunt fmn
+Running "forget-me-not" task
 >> No development links found.
 ```
 

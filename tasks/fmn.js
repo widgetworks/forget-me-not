@@ -1,20 +1,32 @@
-var task = require('./lib/task.js');
+var _ = require('lodash');
+
+var fmnTask = require('./lib/task.js');
 
 module.exports = function(grunt){
 	
-	grunt.registerMultiTask('forget-me-not', 'Scans dependency directories for symlinked (i.e. development) directories before release.', function(){
+	grunt.registerTask('forget-me-not', 'Scan for symlinked development projects', function(target){
 		var options = this.options({
 			dirs: [],
 			npm: true,
 			bower: true,
 			onError: 'warn'	// Valid values: 'warn', 'log'
 		});
+		
+		// Merge in target options over the default options.
+		if (target){
+			var targetConfig = grunt.config.get('forget-me-not.'+target) || {};
+			_.merge(
+				options,
+				targetConfig.options || {}
+			);
+		}
+		
 		if (grunt.option('fmn-log')) {
 			options.onError = 'log';
 		}
 		
 		// Scan each of the directories - aggregate the output.
-		var reportResult = task(options);
+		var reportResult = fmnTask(options);
 		
 		if (reportResult.isValid){
 			grunt.log.oklns('Everything clean');
