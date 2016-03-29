@@ -58,15 +58,23 @@ __Grunt:__
   ...
   
   grunt.loadNpmTasks('forget-me-not');
-  
-  // make an alias that's easier to type...
-  grunt.registerTask('fmn', ['forget-me-not']);
 }
 ```
 
 ```bash
+$ grunt forget-me-not
+
+# Shorter alias
+$ grunt fmn
+
+# Check just the 'release' sub-task
+$ grunt forget-me-not:release
 $ grunt fmn:release
+
+# Just log out instead of erroring
 $ grunt fmn:release --fmn-log
+
+
 Running "forget-me-not:release" (forget-me-not) task
 >> Scanned "node_modules": 33 children (2 symlinked)
 >> Invalid dirs: [

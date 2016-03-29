@@ -43,4 +43,11 @@ module.exports = function(grunt){
 		}
 	});
 	
+	
+	grunt.registerTask('fmn', 'Alias for `forget-me-not`', function(){
+		grunt.task.run([
+			'forget-me-not'
+		]);
+	});
+	
 };
