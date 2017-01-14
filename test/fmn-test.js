@@ -19,8 +19,8 @@ var testLinks = {
 	'multi-invalid/node_modules/original': 				'multi-invalid/node_modules/link',
 	'multi-invalid/bower_components/original': 			'multi-invalid/bower_components/link',
 	
-	'npm-scoped-modues/node_modules/original': 			'npm-scoped-modues/node_modules/link',
-	'npm-scoped-modues/node_modules/@wiwo/original': 	'npm-scoped-modues/node_modules/@wiwo/link'
+	'npm-scoped-modules/node_modules/original': 		'npm-scoped-modules/node_modules/link',
+	'npm-scoped-modules/node_modules/@wiwo/original': 	'npm-scoped-modules/node_modules/@wiwo/link'
 };
 
 
