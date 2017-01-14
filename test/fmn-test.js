@@ -313,9 +313,8 @@ describe('forget-me-not', function(){
 					bower: false
 				});
 				
-				expect(reportResult.isValid).to.equal(true);
-				expect(reportResult.messageList.length).to.eql(1);
-				expect(reportResult.messageList).to.eql([]);
+				expect(reportResult.isValid).to.equal(false);
+				expect(reportResult.messageList.length).to.eql(2);
 			});
 		});
 	});
